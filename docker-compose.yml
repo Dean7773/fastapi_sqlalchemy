@@ -1,0 +1,45 @@
+services:
+  app:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - rabbitmq
+    environment:
+      DATABASE_URL: postgresql://admin:secret@db:5432/mydatabase
+      RABBITMQ_URL: amqp://dean:dean@rabbitmq:5672/
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: mydatabase
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    hostname: rabbitmq
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"   # RabbitMQ
+      - "15672:15672" # Панель управления
+    environment:
+      RABBITMQ_DEFAULT_USER: dean
+      RABBITMQ_DEFAULT_PASS: dean
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+
+volumes:
+  pg_data:
+  rabbitmq_data:

@@ -1,0 +1,3 @@
+VHOST: /
+QUEUE: customer_notifications_dlx
+INDEX: v2

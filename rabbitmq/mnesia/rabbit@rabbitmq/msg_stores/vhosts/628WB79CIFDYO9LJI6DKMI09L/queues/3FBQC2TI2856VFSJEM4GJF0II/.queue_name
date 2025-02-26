@@ -1,0 +1,3 @@
+VHOST: /
+QUEUE: new_orders
+INDEX: v2

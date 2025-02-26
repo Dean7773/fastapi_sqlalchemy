@@ -1,9 +1,11 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
+
 from db import Base
 
 
 class Shop(Base):
+    """Модель магазина."""
     __tablename__ = "shops"
 
     id = Column(Integer, primary_key=True, index=True)

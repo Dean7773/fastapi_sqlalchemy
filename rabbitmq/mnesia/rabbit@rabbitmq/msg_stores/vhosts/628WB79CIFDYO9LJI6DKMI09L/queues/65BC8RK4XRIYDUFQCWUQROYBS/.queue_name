@@ -1,0 +1,3 @@
+VHOST: /
+QUEUE: processing_orders
+INDEX: v2
